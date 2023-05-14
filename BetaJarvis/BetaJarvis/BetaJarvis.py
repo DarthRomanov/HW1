@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 from collections import UserDict
 from datetime import datetime
+from abc import ABC, abstractmethod
 
 
 
@@ -77,9 +78,12 @@ class Email(Field):
         else:
             self.__value = 'E-mail doesn`t correct'
     
+class AbstractRecord(ABC):
+    @abstractmethod
+    def add_phone(self, phone: Phone):
+        pass
 
-
-class Record:
+class Record(AbstractRecord):
     def __init__(self, name: Name, phones: list[Phone] = [], birthday = None, adress: Adress = None, email:Email = None) -> None:
         self.name = name
         self.phones = phones
